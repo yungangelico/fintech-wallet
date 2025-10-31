@@ -1,0 +1,27 @@
+<DOCKTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Финтех-кошелек</title>
+    </head>
+    <body>
+        <h1>Мой баланс</h1>
+        <button id="checkBalance">Показать баланс</button>
+        <p id="balanceText"></p>
+
+        <script>
+            document.getElementById('checkBalance').addEventListener('click', () => {
+                fetch ('http://localhost:3000/api/balance')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('balanceText').innerText = 
+                        'Баланс: ${data.amount} ${data.currency}';
+                })
+                .catch(err => {
+                    document.getElementById('balanceText').innerText = 'Ошибка подключения';
+                    console.error(err);
+                });
+            });
+            </script>
+        </body>
+        </html>
